@@ -3,14 +3,14 @@ import javax.swing.JFrame;
 
 public class UtilisationEnumeration {
 
-	// bien comprendre la différence avec les valeurs finales  static... 
-	// le compilateur crée une classe, sous-classe de Enum qui est directement sous-classe de Object
+	// bien comprendre la diff?rence avec les valeurs finales  static... 
+	// le compilateur cr?e une classe, sous-classe de Enum qui est directement sous-classe de Object
 	// pas de constructeur public...pas d'instanciation.
 	// implicitement static
-	// plus sécuritaire que les variables  final  static
+	// plus s?curitaire que les variables  final  static
 	// Il existe une seule instance de chaque constante enum. 
-	// on peut énumérer les éléments dans l'ordre. 
-	// les valeurs sont des objets. Elles peuvent donc être utilisées comme clé dans une Map. 
+	// on peut ?num?rer les ?l?ments dans l'ordre. 
+	// les valeurs sont des objets. Elles peuvent donc ?tre utilis?es comme cl? dans une Map. 
 	
 	public static void main(String[] args) {
 		 
@@ -28,7 +28,7 @@ public class UtilisationEnumeration {
 		break;	
 		}
 		
-		// énumération des éléments dans l'ordre de définition. 
+		// ?num?ration des ?l?ments dans l'ordre de d?finition. 
 		for(ValeurCartes v : ValeurCartes.values()){
 			System.out.println(" ordre: " + v.ordinal() + " "+  v);
 		}

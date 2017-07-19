@@ -19,13 +19,13 @@ import javax.swing.JPanel;
 public class PanneauCarte extends JPanel implements MouseListener, MouseMotionListener {
 
 	Carte cCarte;
-	private Fenêtre fenetreJeu;
+	private Fenetre fenetreJeu;
 	int deplacementX;
 	int deplacementY;
 	int nouveauX;
 	int nouveauY;
 	boolean carteSelectionnee;
-	boolean rentréDansRectSymbole = false;
+	boolean rentreDansRectSymbole = false;
 	//boolean blnStackEstVide = false;
 
 	// Tableau Rectangle FreeCell
@@ -52,9 +52,9 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 	// Variable de position Initial
 	int posXInitial;
 	int posYInitial;
-	
+
 	int indexPile;
-	
+
 	// tableau contenant les carte placer soit dans les cases libres et les case As
 	Carte tabCarteFreeCell[] = new Carte[4];
 	Carte tabCarteRectSymbole[] = new Carte[4];
@@ -66,7 +66,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 
 	private static final long serialVersionUID = 1L;
 
-	PanneauCarte(Fenêtre fenetreJeu) {
+	PanneauCarte(Fenetre fenetreJeu) {
 		this.fenetreJeu = fenetreJeu;
 		setBackground(Color.CYAN.darker());
 		int posX = -15;
@@ -222,7 +222,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 			nouveauX = e.getX() - deplacementX;
 			nouveauY = e.getY() - deplacementY;
 
-			// on s'assure de ne pas envoyer la carte hors de la fenêtre.
+			// on s'assure de ne pas envoyer la carte hors de la fenetre.
 			nouveauX = Math.max(nouveauX, 0);
 			nouveauX = Math.min(nouveauX, getWidth() - cCarte.getImage().getIconWidth());
 			nouveauY = Math.max(nouveauY, 0);
@@ -232,7 +232,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 			cCarte.setPositionX(nouveauX);
 			cCarte.setPositionY(nouveauY);
 
-			repaint(); // car la position a changé.
+			repaint(); // car la position a change.
 
 		}
 	}
@@ -244,7 +244,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 		int x = e.getX();
 		int y = e.getY();
 
-		// on vérifie si la souris sur la carte
+		// on verifie si la souris sur la carte
 
 		// if(c.estDansCarte(x,y)== true)
 		for (int i = 0; i < tabStack.length && carteSelectionnee == false; i++) {
@@ -279,13 +279,13 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 			if (tabCarteRectSymbole[i] != null) {
 
 				if (tabCarteRectSymbole[i].getRec().contains(x, y)) {
-					rentréDansRectSymbole = true;
+					rentreDansRectSymbole = true;
 					// carteSelectionnee = false;
 				}
 			}
 		}
 
-		if (cCarte != null && rentréDansRectSymbole == false) {
+		if (cCarte != null && rentreDansRectSymbole == false) {
 
 			if (cCarte.getRec().contains(x, y)) {
 				carteSelectionnee = true;
@@ -296,7 +296,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 		}
 
 	}
-	
+
 	public void verificationIndexPile(){
 		if (indexPile != -1) {
 			tabStack[indexPile].pop();
@@ -324,7 +324,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 					// System.out.println("contains");
 					if (tabCarteFreeCell[i] == null) {
 						verificationIndexPile();
-						
+
 						cCarte.setPositionX((int) tabRectFreeCell[i].getX());
 						cCarte.setPositionY((int) tabRectFreeCell[i].getY());
 						if (cCarte != null) {
@@ -338,42 +338,42 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 						cCarte.setPositionY(posYInitial);
 					}
 
-				} else if (tabRectSymbole[i].contains(x, y)) { 
+				} else if (tabRectSymbole[i].contains(x, y)) {
 						if (tabCarteRectSymbole[i] == null && cCarte.getIntValeur() == 1
 								&& cCarte.getEnseigne() == alCarteSymbole.get(i).getEnseigne()) {
 							blnValide = true;
-	
+
 							tabStackAs[i].push(cCarte);
 							System.out.println(tabStackAs[i].push(cCarte));
 							cCarte.setPositionX((int) tabRectSymbole[i].getX());
 							cCarte.setPositionY((int) tabRectSymbole[i].getY());
 							tabCarteRectSymbole[i] = cCarte;
-	
+
 							verificationIndexPile();
-	
+
 						} else if ((cCarte.getEnseigne() == alCarteSymbole.get(i).getEnseigne()) && !(tabStackAs[i].isEmpty())) {
-								
+
 							if ((tabStackAs[i].peek().getIntValeur() + 1) == (cCarte.getIntValeur())) {
 							blnValide = true;
-	
+
 							tabStackAs[i].push(cCarte);
-	
+
 							cCarte.setPositionX((int) tabRectSymbole[i].getX());
 							cCarte.setPositionY((int) tabRectSymbole[i].getY());
-	
+
 							tabCarteRectSymbole[i] = cCarte;
-	
+
 							verificationIndexPile();
 						}
 						}
-						
+
 						// Verification de la victoire
 						if (tabStackAs[0].size() == 14 && tabStackAs[1].size() == 14 && tabStackAs[2].size() == 14
 								&& tabStackAs[3].size() == 14) {
 							int recommencer = JOptionPane.showConfirmDialog(null,
-									"Félicitation vous avez gagnier!\nVoulez-vous recommencer?", "Recommencer",
+									"Felicitation vous avez gagnier!\nVoulez-vous recommencere", "Recommencer",
 									JOptionPane.YES_NO_OPTION);
-	
+
 							if (recommencer == JOptionPane.YES_OPTION) {
 								fenetreJeu.nouvellePartie();
 							}
@@ -435,7 +435,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 		indexPile = -1;
 		carteSelectionnee = false;
 	}
-	
+
 	public void partieBloquer() {
 		boolean blnPartieBloquer = false;
 		boolean blnFreeCellVide = false;
@@ -454,12 +454,12 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 				blnFreeCellVide = true;
 			}
 		}
-		
+
 		//System.out.println("Stack Vide: " + blnStackVide);
 		//System.out.println("FreeCell Vide: " + blnFreeCellVide);
 		if (!blnStackVide && !blnFreeCellVide) {
 			blnPartieBloquer = true;
-			
+
 			// Verification des stacks
 			for (Stack<Carte> stackCarte : tabStack) {
 				for (Stack<Carte> stackCarte2 : tabStack) {
@@ -469,12 +469,12 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 					}
 				}
 			}
-			
+
 			// Verification des FreeCell avec les As
 			for (Carte carte : tabCarteFreeCell) {
 				for (Stack<Carte> stackAs : tabStackAs) {
 					if (!stackAs.isEmpty()) {
-						
+
 						if (carte.getIntValeur() - 1 == stackAs.peek().getIntValeur()
 								&& carte.getEnseigne().getCouleur() == stackAs.peek().getEnseigne().getCouleur()) {
 							System.out.println("As <----> FreeCell Une Carte FreeCell peut etre mis dans les As");
@@ -483,7 +483,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 					}
 				}
 			}
-			
+
 			// Verification des Stack avec As
 			for (Stack<Carte> stackCarte : tabStack) {
 				for (Stack<Carte> stackAs : tabStackAs) {
@@ -495,7 +495,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 					}
 				}
 			}
-			
+
 			// Verification des FreeCell avec Stack
 			for (Carte carte : tabCarteFreeCell) {
 				for (Stack<Carte> stackCarte : tabStack) {
@@ -506,11 +506,11 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 				}
 			}
 		}
-		
+
 		System.out.println("boolean partie bloquer: " + blnPartieBloquer);
 		if (blnPartieBloquer) {
 			int recommencer = JOptionPane.showConfirmDialog(null,
-					"Aucun mouvement possible,vous etes bloquer!\nVoulez-vous recommencer?", "Recommencer",
+					"Aucun mouvement possible,vous etes bloquer!\nVoulez-vous recommencere", "Recommencer",
 					JOptionPane.YES_NO_OPTION);
 
 			if (recommencer == JOptionPane.YES_OPTION) {
@@ -522,7 +522,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 		}
 	}
 
-	// Événement Ignorés
+	// evenement Ignores
 	public void mouseMoved(MouseEvent arg0) {}
 	public void mouseClicked(MouseEvent arg0) {}
 	public void mouseEntered(MouseEvent arg0) {}
