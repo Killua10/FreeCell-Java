@@ -110,7 +110,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 		for (ValeurCartes val : ValeurCartes.values()) {
 			for (Enseigne ens : Enseigne.values()) {
 				cCarte = new Carte(val.ordinal() + 1, ens, posX, posY,
-						new ImageIcon("img\\" + ens.toString().toLowerCase() + (val.ordinal() + 1) + ".gif"));
+						new ImageIcon("resources\\img\\" + ens.toString().toLowerCase() + (val.ordinal() + 1) + ".gif"));
 				al52Carte.add(cCarte);
 				cCarte = null;
 				posX = posX + 20;
@@ -124,7 +124,7 @@ public class PanneauCarte extends JPanel implements MouseListener, MouseMotionLi
 			// TODO: make sure 0 works
 			cCarte = new Carte(0, ens, (int) tabRectSymbole[intCompteurIndexRectSymbole].getX(),
 					(int) tabRectSymbole[intCompteurIndexRectSymbole].getY(),
-					new ImageIcon("img\\" + ens.toString().toLowerCase() + ".gif"));
+					new ImageIcon("resources\\img\\" + ens.toString().toLowerCase() + ".gif"));
 			alCarteSymbole.add(cCarte);
 			cCarte = null;
 			// posX = posX + 20;
